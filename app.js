@@ -48,8 +48,6 @@ const getImages = (query) => {
 const toggleSpinner = () =>{
   const spinner = document.getElementById('loading-spinner');
   spinner.classList.toggle('d-none');
-  // spinner.classList.toggle('d-flex');
-  //console.log(spinner.classList);
 }
 let slideIndex = 0;
 const selectItem = (event, img) => {
@@ -58,9 +56,7 @@ const selectItem = (event, img) => {
  
   let item = sliders.indexOf(img);
   if (item === -1) {
-    console.log("item", item);
     sliders.push(img);
-    console.log("slider-length",sliders.length);
   } else {
    sliders.pop(img);
    element.classList.remove('added');
@@ -89,7 +85,6 @@ const createSlider = () => {
   const duration = document.getElementById('duration').value || 1000;
   if(duration >= 1000){
     sliders.forEach(slide => {
-      console.log(slide);
       let item = document.createElement('div')
       item.className = "slider-item";
       item.innerHTML = `<img class="w-100"
@@ -103,7 +98,6 @@ const createSlider = () => {
       changeSlide(slideIndex);
     }, duration);
   }else{
-   // console.log("please greater than 1s number");
     let message = document.createElement('div')
     message.innerHTML=`<p class="p-3 mb-2 bg-info text-white rounded text-center font-weight-bold">Slider Change Duration should be greater than or equal 1000ms (1s)</p>`
     document.getElementById("error-message").appendChild(message);
@@ -132,8 +126,7 @@ const changeSlide = (index) => {
   }
 
   items.forEach(item => {
-    item.style.display = "none"
-    console.log(item);
+    item.style.display = "none";
   })
 
   items[index].style.display = "block"
@@ -145,7 +138,7 @@ searchBtn.addEventListener('click', function () {
   const search = document.getElementById('search');
   getImages(search.value)
   sliders.length = 0;
-
+  // document.querySelector('.txtSearch').value= '';
 })
 
 sliderBtn.addEventListener('click', function () {
