@@ -4,6 +4,7 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+const searchBox =  document.getElementById('search');
 // selected image 
 let sliders = [];
 
@@ -13,8 +14,7 @@ let sliders = [];
 // to create your own api key
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
-document.getElementById('search')
-.addEventListener('keypress', function (e) {
+searchBox.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     searchBtn.click();
   }
@@ -38,7 +38,6 @@ const showImages = (images) => {
 
 const getImages = (query) => { 
   toggleSpinner();
-
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -99,13 +98,11 @@ const createSlider = () => {
     }, duration);
   }else{
     let message = document.createElement('div')
-    message.innerHTML=`<p class="p-3 mb-2 bg-info text-white rounded text-center font-weight-bold">Slider Change Duration should be greater than or equal 1000ms (1s)</p>`
+    message.innerHTML=`<p class="p-3 mb-2 bg-primary text-white rounded text-center font-italic font-weight-bold">Slider Change Duration should be greater than or equal to 1000ms (1s)</p>`
     document.getElementById("error-message").appendChild(message);
   }
 
 }
-
-
 // change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
@@ -113,7 +110,6 @@ const changeItem = index => {
 
 // change slide item
 const changeSlide = (index) => {
-
   const items = document.querySelectorAll('.slider-item');
   if (index < 0) {
     slideIndex = items.length - 1
